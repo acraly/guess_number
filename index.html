@@ -41,7 +41,7 @@ p{
  font-size: 3rem;   
 }
 </style>
-<body>
+<body id="main">
     <div class="page"><label for="sayi">Guess The Number (1-100)</label><br><br><br><br>
         <div class="input">
             <input type="number" name="" id="sayi" placeholder="Enter a number..." value="">
@@ -57,8 +57,9 @@ p{
         var num =sayiUret(0,100) ;
         var sayi = document.querySelector("#sayi");
         var check= document.querySelector("#check");
-        var gosterge=document.querySelector("#gosterge")
-        var puan = document.querySelector("#puan")
+        var gosterge=document.querySelector("#gosterge");
+        var puan = document.querySelector("#puan");
+        var main = document.querySelector("#main");
 
         function sayiUret(min,max){
             return sayi=Math.round(Math.random()*(max-min))+min;   
@@ -66,8 +67,12 @@ p{
         
         check.onclick=function(){
             score -= 10 ;
+            if(sayi.value > 100 || sayi.value < 0){
+                score +=10;
+                gosterge.innerHTML="your number must be between 0 and 100"  
+            }
            
-            if(sayi.value < num){
+            else if(sayi.value < num){
                 gosterge.innerHTML="your number(" +sayi.value+ ") is less then generated number!<br>Please try again..."  
                 puan.innerHTML= "your score : "+score
                 
@@ -81,8 +86,7 @@ p{
                 score +=10;
                 gosterge.innerHTML="congratulations!!!";
                 puan.innerHTML= "your score : "+score;
-                
-                
+                body.style.backgroundcolor="white"
             }
             sayi.value=""
         }
