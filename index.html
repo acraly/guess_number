@@ -36,6 +36,12 @@ button{
     background-color: maroon;
     color: moccasin;
 }
+img{
+    
+    border-radius: 1rem;
+    width: 25%;
+    /* height: 50%; */
+}
 
 p{
  font-size: 3rem;   
@@ -47,9 +53,13 @@ p{
             <input type="number" name="" id="sayi" placeholder="Enter a number..." value="">
             <button id="check">CHECK</button>
         </div>
+        <img id="image" src="./images/tahmin.jpg" alt="">
         <p id="gosterge"></p>
         <p id="puan"></p>
+        
     </div>
+    
+ 
    
 
     <script>
@@ -60,33 +70,35 @@ p{
         var gosterge=document.querySelector("#gosterge");
         var puan = document.querySelector("#puan");
         var main = document.querySelector("#main");
+        var image = document.querySelector("#image")
 
         function sayiUret(min,max){
-            return sayi=Math.round(Math.random()*(max-min))+min;   
+            return Math.round(Math.random()*(max-min))+min;   
         }
         
         check.onclick=function(){
-            score -= 10 ;
+          
             if(sayi.value > 100 || sayi.value < 0){
-                score +=10;
                 gosterge.innerHTML="your number must be between 0 and 100"  
             }
            
             else if(sayi.value < num){
-                gosterge.innerHTML="your number(" +sayi.value+ ") is less then generated number!<br>Please try again..."  
-                puan.innerHTML= "your score : "+score
-                
-            }
-            else if(sayi.value > num){
-                gosterge.innerHTML="your number(" +sayi.value+ ") is higher then generated number!<br>Please try again..."
-                puan.innerHTML= "your score : "+score
-            }
-            else{
-                
-                score +=10;
-                gosterge.innerHTML="congratulations!!!";
+                score -= 10 ;
+                gosterge.innerHTML="your number(" +sayi.value+ ") is less then generated number!<br>Please increase your number..."  
                 puan.innerHTML= "your score : "+score;
-                body.style.backgroundcolor="white"
+            }
+            
+            else if(sayi.value > num){
+                score -= 10 ;
+                gosterge.innerHTML="your number(" +sayi.value+ ") is higher then generated number!<br>Please decrease your number..."
+                puan.innerHTML= "your score : "+score;
+            }
+            
+            else{
+                image.src="./images/congratulations.jpg"
+                gosterge.innerHTML="Number is: "+num;
+                puan.innerHTML= `your score : ${score} <br>
+                <button onclick="window.location.reload(false)">REPLAY</button>`;
             }
             sayi.value=""
         }
