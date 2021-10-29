@@ -50,7 +50,7 @@ p{
 <body id="main">
     <div class="page"><label for="sayi">Guess The Number (1-100)</label><br><br><br><br>
         <div class="input">
-            <input type="number" name="" id="sayi" placeholder="Enter a number..." value="">
+            <input type="text" name="" id="sayi" placeholder="Enter a number..." value="">
             <button id="check">CHECK</button>
         </div>
         <img id="image" src="./images/tahmin.jpg" alt="">
@@ -58,10 +58,6 @@ p{
         <p id="puan"></p>
         
     </div>
-    
- 
-   
-
     <script>
         var score = 100
         var num =sayiUret(0,100) ;
@@ -77,8 +73,11 @@ p{
         }
         
         check.onclick=function(){
+            if(isNaN(sayi.value)){
+                alert("Please enter a number")
+            }
           
-            if(sayi.value > 100 || sayi.value < 0){
+            else if(sayi.value > 100 || sayi.value < 0){
                 gosterge.innerHTML="your number must be between 0 and 100"  
             }
            
